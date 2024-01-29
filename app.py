@@ -2,6 +2,7 @@ import streamlit as st
 from PIL import Image
 import pytesseract
 import pandas as pd
+import plotly.express as px
 
 st.title("Simple Multiple Image Text Extractor")
 
@@ -49,3 +50,9 @@ if uploaded_files:
     # Display the DataFrame
     st.subheader("DataFrame:")
     st.dataframe(df)
+
+    chartCreate = st.checkbox("Draw line chart")
+    if chartCreate:
+        # Line chart with time on the x-axis and KW_num on the y-axis
+        fig = px.line(df, x='Time', y='KW_num', title='KW_num Over Time', labels={'KW_num': 'KW'})
+        st.plotly_chart(fig)
