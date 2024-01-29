@@ -3,10 +3,10 @@ from PIL import Image
 import pytesseract
 import pandas as pd
 
-st.title("Multiple Image Text Extractor and DataFrame")
+st.title("Simple Multiple Image Text Extractor")
 
 # Create an empty DataFrame
-df = pd.DataFrame(columns=['Time', 'KW'])
+df = pd.DataFrame(columns=['Time', 'KW', 'KW_num'])
 
 # Upload multiple images through Streamlit
 uploaded_files = st.file_uploader("Choose multiple images...", type=["jpg", "png"], accept_multiple_files=True)
@@ -28,8 +28,11 @@ if uploaded_files:
         time_info = text[:5]  # Extract the first 5 characters for time
         kw_info = text.splitlines()[number]  # Extract the 9th line for kW
 
+       # Extract the first two numbers from 'KW' and convert to integer
+        kw_num = int(''.join(filter(str.isdigit, kw_info[:2])))
+
         # Add values to the DataFrame using loc
-        df.loc[df.shape[0]] = {'Time': time_info, 'KW': kw_info}
+        df.loc[df.shape[0]] = {'Time': time_info, 'KW': kw_info, 'KW_num': kw_num}
 
         # Specify the position where the relevant text should be placed
         #position = (100, 100)  # Replace with your desired position coordinates
@@ -43,6 +46,6 @@ if uploaded_files:
         st.subheader(f"Extracted Text from {uploaded_file.name}:")
         st.text(text)
 
-# Display the DataFrame
-st.subheader("DataFrame:")
-st.dataframe(df)
+    # Display the DataFrame
+    st.subheader("DataFrame:")
+    st.dataframe(df)
