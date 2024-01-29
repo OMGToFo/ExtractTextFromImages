@@ -2,7 +2,7 @@ import streamlit as st
 from PIL import Image
 import pytesseract
 
-st.title("Multiple Image Text Extractor")
+st.title("Simple Image Text Extractor")
 
 # Upload multiple images through Streamlit
 uploaded_files = st.file_uploader("Choose multiple images...", type=["jpg", "png"], accept_multiple_files=True)
