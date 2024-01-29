@@ -27,4 +27,4 @@ if uploaded_file is not None:
 
     # Display the extracted text
     st.subheader("Extracted Text:")
-    st.text(text)
+    st.info(text)
