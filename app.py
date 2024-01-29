@@ -18,12 +18,12 @@ if uploaded_files:
         text = pytesseract.image_to_string(image)
 
         # Specify the position where the relevant text should be placed
-        position = (100, 100)  # Replace with your desired position coordinates
+        #position = (100, 100)  # Replace with your desired position coordinates
 
         # Create an image with text placed at the specified position
-        image_with_text = Image.new('RGB', image.size)
-        image_with_text.paste(image, (0, 0))
-        st.image(image_with_text, caption=f'Image with Extracted Text - {uploaded_file.name}', use_column_width=True)
+        #image_with_text = Image.new('RGB', image.size)
+        #image_with_text.paste(image, (0, 0))
+        #st.image(image_with_text, caption=f'Image with Extracted Text - {uploaded_file.name}', use_column_width=True)
 
         # Display the extracted text
         st.subheader(f"Extracted Text from {uploaded_file.name}:")
