@@ -25,16 +25,16 @@ if uploaded_files:
         time_info = text[:5]  # Extract the first 5 characters for time
         kw_info = text.splitlines()[8]  # Extract the 9th line for kW
 
-        # Append values to the DataFrame
-        df = df.append({'Time': time_info, 'KW': kw_info}, ignore_index=True)
+        # Add values to the DataFrame using loc
+        df.loc[df.shape[0]] = {'Time': time_info, 'KW': kw_info}
 
         # Specify the position where the relevant text should be placed
-        #position = (100, 100)  # Replace with your desired position coordinates
+        position = (100, 100)  # Replace with your desired position coordinates
 
         # Create an image with text placed at the specified position
-        #image_with_text = Image.new('RGB', image.size)
-        #image_with_text.paste(image, (0, 0))
-        #st.image(image_with_text, caption=f'Image with Extracted Text - {uploaded_file.name}', use_column_width=True)
+        image_with_text = Image.new('RGB', image.size)
+        image_with_text.paste(image, (0, 0))
+        st.image(image_with_text, caption=f'Image with Extracted Text - {uploaded_file.name}', use_column_width=True)
 
         # Display the extracted text
         st.subheader(f"Extracted Text from {uploaded_file.name}:")
