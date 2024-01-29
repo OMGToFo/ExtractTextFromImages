@@ -13,7 +13,7 @@ uploaded_files = st.file_uploader("Choose multiple images...", type=["jpg", "png
 
 if uploaded_files:
 
-    number = st.number_input("Insert a number", value=8, placeholder="Line nr..")
+    number = st.number_input("Insert a line number", value=10, placeholder="Line nr..")
     
     st.subheader("Uploaded Images:")
     for uploaded_file in uploaded_files:
