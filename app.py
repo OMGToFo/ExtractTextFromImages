@@ -12,6 +12,9 @@ df = pd.DataFrame(columns=['Time', 'KW'])
 uploaded_files = st.file_uploader("Choose multiple images...", type=["jpg", "png"], accept_multiple_files=True)
 
 if uploaded_files:
+
+    number = st.number_input("Insert a number", value=8, placeholder="Line nr..")
+    
     st.subheader("Uploaded Images:")
     for uploaded_file in uploaded_files:
         # Display the uploaded image
@@ -23,7 +26,7 @@ if uploaded_files:
 
         # Extract relevant information
         time_info = text[:5]  # Extract the first 5 characters for time
-        kw_info = text.splitlines()[8]  # Extract the 9th line for kW
+        kw_info = text.splitlines()[number]  # Extract the 9th line for kW
 
         # Add values to the DataFrame using loc
         df.loc[df.shape[0]] = {'Time': time_info, 'KW': kw_info}
