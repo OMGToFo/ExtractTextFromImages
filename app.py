@@ -4,7 +4,7 @@ import pytesseract
 import pandas as pd
 import plotly.express as px
 
-import helpers.opencv as opencv
+#import helpers.opencv as opencv
 
 st.title("Simple Multiple Image Text Extractor")
 
@@ -16,7 +16,7 @@ uploaded_files = st.file_uploader("Choose multiple images...", type=["jpg", "png
 
 if uploaded_files:
 
-    st.write("Check the boxes below to apply preprocessing to the image.")
+    st.write("Not activated yet - Check the boxes below to apply preprocessing to the image.")
     cGrayscale = st.checkbox(label="Grayscale", value=True)
     cDenoising = st.checkbox(label="Denoising", value=False)
     cDenoisingStrength = st.slider(label="Denoising Strength", min_value=1, max_value=40, value=10, step=1)
@@ -27,6 +27,7 @@ if uploaded_files:
     cRotateFree = st.checkbox(label="Rotate in free degrees", value=False)
     angle = st.slider("Rotate freely [Degree]", min_value=-180, max_value=180, value=0, step=1)
 
+    _="""    
     try:
         # convert uploaded file to numpy array
          image = opencv.load_image(uploaded_files[0])
@@ -57,6 +58,7 @@ if uploaded_files:
             st.error(f"Exception during Image Preprocessing (Probably you selected Threshold on a color image?): {e}")
             st.stop()
 
+    """ 
 
 
     
