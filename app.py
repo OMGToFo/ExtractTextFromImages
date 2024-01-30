@@ -13,8 +13,9 @@ df = pd.DataFrame(columns=['Time', 'KW', 'KW_num'])
 uploaded_files = st.file_uploader("Choose multiple images...", type=["jpg", "png"], accept_multiple_files=True)
 
 if uploaded_files:
-
-    number = st.number_input("Insert a line number", value=10, placeholder="Line nr..")
+    textselection = st.toggle("Extract certain text and make table bitte")
+    if textselection:
+        number = st.number_input("Insert a line number", value=10, placeholder="Line nr..")
     
     st.subheader("Uploaded Images:")
     for uploaded_file in uploaded_files:
@@ -25,15 +26,16 @@ if uploaded_files:
         # Perform OCR using pytesseract
         text = pytesseract.image_to_string(image)
 
+        if textselection:
         # Extract relevant information
-        time_info = text[:5]  # Extract the first 5 characters for time
-        kw_info = text.splitlines()[number]  # Extract the 9th line for kW
+            time_info = text[:5]  # Extract the first 5 characters for time
+            kw_info = text.splitlines()[number]  # Extract the 9th line for kW
 
-       # Extract the first two numbers from 'KW' and convert to integer
-        kw_num = int(''.join(filter(str.isdigit, kw_info[:2])))
+           # Extract the first two numbers from 'KW' and convert to integer
+            kw_num = int(''.join(filter(str.isdigit, kw_info[:2])))
 
-        # Add values to the DataFrame using loc
-        df.loc[df.shape[0]] = {'Time': time_info, 'KW': kw_info, 'KW_num': kw_num}
+            # Add values to the DataFrame using loc
+            df.loc[df.shape[0]] = {'Time': time_info, 'KW': kw_info, 'KW_num': kw_num}
 
         # Specify the position where the relevant text should be placed
         #position = (100, 100)  # Replace with your desired position coordinates
@@ -47,12 +49,13 @@ if uploaded_files:
         st.subheader(f"Extracted Text from {uploaded_file.name}:")
         st.text(text)
 
-    # Display the DataFrame
-    st.subheader("DataFrame:")
-    st.dataframe(df)
-
-    chartCreate = st.checkbox("Draw line chart")
-    if chartCreate:
-        # Line chart with time on the x-axis and KW_num on the y-axis
-        fig = px.line(df, x='Time', y='KW_num', title='KW_num Over Time', labels={'KW_num': 'KW'})
-        st.plotly_chart(fig)
+        if textselection:
+            # Display the DataFrame
+            st.subheader("DataFrame:")
+            st.dataframe(df)
+            
+            chartCreate = st.checkbox("Draw line chart")
+            if chartCreate:
+                # Line chart with time on the x-axis and KW_num on the y-axis
+                fig = px.line(df, x='Time', y='KW_num', title='KW_num Over Time', labels={'KW_num': 'KW'})
+                st.plotly_chart(fig)
