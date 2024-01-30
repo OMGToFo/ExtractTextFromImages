@@ -3,6 +3,8 @@ from PIL import Image
 import pytesseract
 import pandas as pd
 import plotly.express as px
+import cv2
+import numpy as np
 
 #import helpers.opencv as opencv
 
