@@ -27,8 +27,39 @@ if uploaded_files:
     cRotateFree = st.checkbox(label="Rotate in free degrees", value=False)
     angle = st.slider("Rotate freely [Degree]", min_value=-180, max_value=180, value=0, step=1)
 
+    try:
+        # convert uploaded file to numpy array
+         image = opencv.load_image(uploaded_files[0])
+    except Exception as e:
+        st.error("Exception during Image Conversion")
+        st.error(f"Error Message: {e}")
+        st.stop()
 
 
+        try:
+            if cGrayscale:
+                image = opencv.grayscale(image)
+            if cDenoising:
+                image = opencv.denoising(image, strength=cDenoisingStrength)
+            if cThresholding:
+                image = opencv.thresholding(image, threshold=cThresholdLevel)
+            if cRotate90:
+                # convert angle to opencv2 enum
+                angle90 = constants.angles.get(angle90, None)
+                image = opencv.rotate90(image, rotate=angle90)
+            if cRotateFree:
+                image = opencv.rotate_scipy(image, angle=angle, reshape=True)
+            # TODO: add crop functions here
+            # if cCrop:
+            #     pass
+            image = opencv.convert_to_rgb(image)
+        except Exception as e:
+            st.error(f"Exception during Image Preprocessing (Probably you selected Threshold on a color image?): {e}")
+            st.stop()
+
+
+
+    
 
     
     textselection = st.toggle("Extract certain text and make a table bitte")
