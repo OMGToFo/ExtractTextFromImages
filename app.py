@@ -79,7 +79,7 @@ if uploaded_files:
         image = Image.open(uploaded_file)
         
         if cGrayscale:
-            image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
         
         st.image(image, caption=f'Uploaded Image - {uploaded_file.name}', use_column_width=True)
