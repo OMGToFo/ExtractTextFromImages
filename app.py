@@ -13,7 +13,23 @@ df = pd.DataFrame(columns=['Time', 'KW', 'KW_num'])
 uploaded_files = st.file_uploader("Choose multiple images...", type=["jpg", "png"], accept_multiple_files=True)
 
 if uploaded_files:
-    textselection = st.toggle("Extract certain text and make table bitte")
+
+    st.write("Check the boxes below to apply preprocessing to the image.")
+    cGrayscale = st.checkbox(label="Grayscale", value=True)
+    cDenoising = st.checkbox(label="Denoising", value=False)
+    cDenoisingStrength = st.slider(label="Denoising Strength", min_value=1, max_value=40, value=10, step=1)
+    cThresholding = st.checkbox(label="Thresholding", value=False)
+    cThresholdLevel = st.slider(label="Threshold Level", min_value=0, max_value=255, value=128, step=1)
+    cRotate90 = st.checkbox(label="Rotate in 90° steps", value=False)
+    angle90 = st.slider("Rotate rectangular [Degree]", min_value=0, max_value=270, value=0, step=90)
+    cRotateFree = st.checkbox(label="Rotate in free degrees", value=False)
+    angle = st.slider("Rotate freely [Degree]", min_value=-180, max_value=180, value=0, step=1)
+
+
+
+
+    
+    textselection = st.toggle("Extract certain text and make a table bitte")
     if textselection:
         number = st.number_input("Insert a line number", value=10, placeholder="Line nr..")
     
