@@ -4,6 +4,8 @@ import pytesseract
 import pandas as pd
 import plotly.express as px
 
+import helpers.opencv as opencv
+
 st.title("Simple Multiple Image Text Extractor")
 
 # Create an empty DataFrame
