@@ -77,6 +77,7 @@ if uploaded_files:
     for uploaded_file in uploaded_files:
         # Display the uploaded image
         image = Image.open(uploaded_file)
+        
         if cGrayscale:
             image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
