@@ -14,7 +14,7 @@ st.title("Simple Image Text Extractor")
 df = pd.DataFrame(columns=['Time', 'KW', 'KW_num'])
 
 # Upload multiple images through Streamlit
-uploaded_files = st.file_uploader("Choose multiple images...", type=["jpg", "png"], accept_multiple_files=False)
+uploaded_files = st.file_uploader("Choose multiple images...", type=["jpg", "png"], accept_multiple_files=True)
 
 if uploaded_files:
 
