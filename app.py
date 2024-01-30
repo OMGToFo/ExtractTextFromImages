@@ -29,7 +29,7 @@ if uploaded_files:
     cRotateFree = st.checkbox(label="Rotate in free degrees", value=False)
     angle = st.slider("Rotate freely [Degree]", min_value=-180, max_value=180, value=0, step=1)
 
-      
+    _="""  
     try:
         # convert uploaded file to numpy array
          image = opencv.load_image(uploaded_files)
@@ -59,7 +59,7 @@ if uploaded_files:
         except Exception as e:
             st.error(f"Exception during Image Preprocessing (Probably you selected Threshold on a color image?): {e}")
             st.stop()
-
+        """
   
 
 
