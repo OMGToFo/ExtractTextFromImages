@@ -29,7 +29,7 @@ if uploaded_files:
     cRotateFree = st.checkbox(label="Rotate in free degrees", value=False)
     angle = st.slider("Rotate freely [Degree]", min_value=-180, max_value=180, value=0, step=1)
     
-    if cGrayscale:
+
         
     
     _="""  
@@ -77,6 +77,10 @@ if uploaded_files:
     for uploaded_file in uploaded_files:
         # Display the uploaded image
         image = Image.open(uploaded_file)
+        if cGrayscale:
+            image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+        
         st.image(image, caption=f'Uploaded Image - {uploaded_file.name}', use_column_width=True)
 
         # Perform OCR using pytesseract
